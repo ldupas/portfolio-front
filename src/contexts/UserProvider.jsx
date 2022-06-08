@@ -8,11 +8,11 @@ import {
 const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
-    // ici je déinifis le state initial de mon user
+    // ici je définis le state initial de mon user
     // à savoir
-    // si j'ai un item de type 'user', utilises le json.parse pour lire les propriétés
+    // si j'ai un item de type 'user', utilise le json.parse pour lire les propriétés
     // internes à l'objet
-    // sinon, mon code ne bouge
+    // sinon, mon code ne bouge pas
     const [user, setUser] = useState(
         localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
     );
