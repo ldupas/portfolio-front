@@ -17,7 +17,7 @@ const Navbar = () => {
                 {user && (
                     <>
                         <Link to="/login">Mon espace admin</Link>
-                        <Link to="/register">Déconnexion</Link>
+                        <Link to="/disconnect">Déconnexion</Link>
                     </>
                 )
                 }
