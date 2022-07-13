@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import AdminPanel from '../admin-panel/AdminPanel';
 
-const AddProject = () => {
+const ModifyProject = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [picture, setPicture] = useState('');
@@ -14,21 +13,25 @@ const AddProject = () => {
     const [categoryId, setCategoryId] = useState();
 
     const navigator = useNavigate();
+    const param = useParams();
+    let projectId = parseInt(param.id)
+
+    console.log(projectId)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
 
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('picture', picture);
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("picture", picture);
         // formData.append('date', date);
-        formData.append('repo_front', repo_front);
-        formData.append('repo_back', repo_back);
-        formData.append('deploy_url', deploy_url);
-        formData.append('category_id',  categoryId);
+        formData.append("repo_front", repo_front);
+        formData.append("repo_back", repo_back);
+        formData.append("deploy_url", deploy_url);
+        formData.append("category_id",  categoryId);
 
-        await axios.post(`${process.env.REACT_APP_API_URL}/projects`, formData)
+        await axios.put(`${process.env.REACT_APP_API_URL}/projects/${projectId}`, formData)
         navigator("/admin");
     }
 
@@ -65,4 +68,4 @@ const AddProject = () => {
     )
 }
 
-export default AddProject
+export default ModifyProject;

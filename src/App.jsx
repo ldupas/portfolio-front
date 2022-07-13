@@ -10,6 +10,7 @@ import AdminRoutes from './components/admin/admin-routes/AdminRoutes';
 import UserProvider from './contexts/UserProvider';
 
 import './App.css';
+import ModifyProject from './components/admin/crud/ModifyProject';
 
 const App = () => (
   <div className="App">
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/admin" element={<AdminRoutes />}>
           <Route index element={<AdminPanel />} />
         </Route>
+        <Route path="/admin/modify-project/:id" element={<ModifyProject/>} />
       </Routes>
     </UserProvider>
   </div>
