@@ -6,11 +6,11 @@ const ModifyProject = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [picture, setPicture] = useState('');
-    const [date, setDate] = useState();
+    // const [date, setDate] = useState();
     const [repo_front, setRepoFront] = useState('');
     const [repo_back, setRepoBack] = useState('');
     const [deploy_url, setDeploy] = useState('');
-    const [categoryId, setCategoryId] = useState();
+    // const [categoryId, setCategoryId] = useState();
 
     const navigator = useNavigate();
     const param = useParams();
@@ -20,19 +20,17 @@ const ModifyProject = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const formData = new FormData();
-
-        formData.append("name", name);
-        formData.append("description", description);
-        formData.append("picture", picture);
-        // formData.append('date', date);
-        formData.append("repo_front", repo_front);
-        formData.append("repo_back", repo_back);
-        formData.append("deploy_url", deploy_url);
-        formData.append("category_id",  categoryId);
-
-        await axios.put(`${process.env.REACT_APP_API_URL}/projects/${projectId}`, formData)
-        navigator("/admin");
+        
+        const data = {
+            name: name,
+            description: description,
+            picture: picture,
+            repo_front,
+            repo_back,
+            deploy_url: deploy_url
+        }
+        await axios.put(`${process.env.REACT_APP_API_URL}/projects/${projectId}`, data)
+        // navigator("/admin");
     }
 
     return (
@@ -47,9 +45,6 @@ const ModifyProject = () => {
                 <label htmlFor="picture">Picture</label>
                 <input type="file" id='picture' onChange={(event) => setPicture(event.target.files[0])} />
 
-                {/* <label htmlFor="date">Date</label>
-                <input type="date" id='date' onChange={(event) => setDate(event.target.value)} /> */}
-
                 <label htmlFor="repoFront">Repo Front</label>
                 <input type="text" id='repoFront' onChange={(event) => setRepoFront(event.target.value)} />
 
@@ -58,9 +53,6 @@ const ModifyProject = () => {
 
                 <label htmlFor="deploy">Deploy Link</label>
                 <input type="text" id='deploy' onChange={(event) => setDeploy(event.target.value)} />
-
-                <label htmlFor="categoryId">Category Id</label>
-                <input type="text" id='categoryId' onChange={(event) => setCategoryId(parseInt(event.target.value))} />
 
                 <button type='submit'>Envoyer</button>
             </form>
